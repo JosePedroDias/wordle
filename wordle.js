@@ -2,7 +2,8 @@ const readline = require('readline');
 
 
 
-const words = require('./pt-5-natura.json');
+//const words = require('./pt-5-natura.json');
+const words = require('./en-5-google-10k.json');
 //const words = require('./en-5-scowl.json');
 
 

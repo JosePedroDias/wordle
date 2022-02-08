@@ -19,7 +19,7 @@ The filtering approach it gets you back is super naive.
 - https://natura.di.uminho.pt/wiki/doku.php?id=dicionarios:main
 - https://natura.di.uminho.pt/download/sources/Dictionaries/wordlists/LATEST/
 
-Created `pt-<n>-natura.js` by filtering out 5, 6 a 7 letter words out of the wordlists file, ignoring words with hiphen. All credits to Universidade do Minho!
+Created `pt-<n>-natura.json` by filtering out 5, 6 a 7 letter words out of the wordlists file, ignoring words with hiphen. All credits to Universidade do Minho!
 
 
 ## Gathering my en_US dictionary the lazy way:
@@ -59,4 +59,13 @@ Created `pt-<n>-natura.js` by filtering out 5, 6 a 7 letter words out of the wor
 
     http://wordlist.aspell.net/
 
-Created `en-<n>-scowl.js` by filtering out 5, 6 a 7 letter words out of the wordlists file, ignoring words with '. All credits to SCOWL!
+
+Created `en-<n>-scowl.json` by filtering out 5, 6 a 7 letter words out of the wordlists file, ignoring words with '. All credits to SCOWL!
+
+- https://github.com/first20hours/google-10000-english -> https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english-usa-no-swears-medium.txt
+
+    Data files are derived from the Google Web Trillion Word Corpus, as described by Thorsten Brants and Alex Franz, and distributed by the Linguistic Data Consortium. Subsets of this corpus distributed by Peter Novig. Corpus editing and cleanup by Josh Kaufman.
+
+    Educational and personal/research use of this data is permitted under the LDC license, Norvig's MIT license for his contributions, and US fair use doctrine. I do not recommend using this data for commercial purposes without licensing it from the Linguistic Data Consortium.
+
+Created `en-<n>-google-10k.json` by filtering out 5, 6 a 7 letter words out of the wordlists file'. All credits to the Linguistic Data Consortium!
