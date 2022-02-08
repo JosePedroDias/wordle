@@ -16,4 +16,6 @@ Playing with the algorithms after seeing https://www.youtube.com/watch?v=v68zYya
 - https://natura.di.uminho.pt/wiki/doku.php?id=dicionarios:main
 - https://natura.di.uminho.pt/download/sources/Dictionaries/wordlists/LATEST/
 
-Created `words-pt-natura.js` by filtering out 5, 6 a 7 letter words out of the wordlists file. All credits to Universidade do Minho!
+Created `pt-<n>-natura.js` by filtering out 5, 6 a 7 letter words out of the wordlists file, ignoring words with hiphen. All credits to Universidade do Minho!
+
+The filtering approach it gets you back is super naive.
