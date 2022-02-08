@@ -1,6 +1,39 @@
 const readline = require('readline');
 
+
+
 const words = require('./pt-5-natura.json');
+//const words = require('./en-5-scowl.json');
+
+
+
+////////////////
+
+// TERMINAL COLORS
+/*const C_RED = '\x1b[31m';
+const C_YELLOW = '\x1b[33m';
+const C_GREEN = '\x1b[32m';
+const C_DEFAULT = '\x1b[0m';
+const C_RIGHT = `${C_GREEN}O${C_DEFAULT}`;
+const C_EXISTS = `${C_YELLOW}O${C_DEFAULT}`;
+const C_NONE_OF_THESE = `${C_RED}O${C_DEFAULT}`;
+const [RIGHT, EXISTS, NONE_OF_THESE] = [C_RIGHT, C_EXISTS, C_NONE_OF_THESE];*/
+
+// EMOJIS (DON'T WORK WELL IN WINDOWS)
+/*const E_RIGHT = `🟩`;
+const E_EXISTS = `🟨`;
+const E_NONE_OF_THESE = `⬛`;
+const [RIGHT, EXISTS, NONE_OF_THESE] = [E_RIGHT, E_EXISTS, E_NONE_OF_THESE];*/
+
+// ASCII
+const A_RIGHT = `O`;
+const A_EXISTS = `.`;
+const A_NONE_OF_THESE = `_`;
+const [RIGHT, EXISTS, NONE_OF_THESE] = [A_RIGHT, A_EXISTS, A_NONE_OF_THESE];
+
+////////////////
+
+
 
 function to26(word) {
     return word.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
@@ -36,28 +69,6 @@ function shuffle(array) {
         [array[i], array[j]] = [array[j], array[i]];
     }
 }
-
-// TERMINAL COLORS
-/*const C_RED = '\x1b[31m';
-const C_YELLOW = '\x1b[33m';
-const C_GREEN = '\x1b[32m';
-const C_DEFAULT = '\x1b[0m';
-const C_RIGHT = `${C_GREEN}O${C_DEFAULT}`;
-const C_EXISTS = `${C_YELLOW}O${C_DEFAULT}`;
-const C_NONE_OF_THESE = `${C_RED}O${C_DEFAULT}`;
-const [RIGHT, EXISTS, NONE_OF_THESE] = [C_RIGHT, C_EXISTS, C_NONE_OF_THESE];*/
-
-// EMOJIS (DON'T WORK WELL IN WINDOWS)
-/*const E_RIGHT = `🟩`;
-const E_EXISTS = `🟨`;
-const E_NONE_OF_THESE = `⬛`;
-const [RIGHT, EXISTS, NONE_OF_THESE] = [E_RIGHT, E_EXISTS, E_NONE_OF_THESE];*/
-
-// ASCII
-const A_RIGHT = `O`;
-const A_EXISTS = `.`;
-const A_NONE_OF_THESE = `_`;
-const [RIGHT, EXISTS, NONE_OF_THESE] = [A_RIGHT, A_EXISTS, A_NONE_OF_THESE];
 
 function evaluateGuess(guess, secret26) {
     const feedback = [];
@@ -97,6 +108,8 @@ function criteriaToFilterFunction(criteria) {
     return new Function(`const w = arguments[0]; return ${expr}`);
 }
 
+
+
 async function runGame() {
     const rl = readline.createInterface(process.stdin, process.stdout);
 
@@ -126,7 +139,7 @@ async function runGame() {
             console.log('Unknown word!');
         }
         else if (guess === secret26) {
-            console.log(`You found it with ${roundNum} attempts! It was ${secret}!`);
+            console.log(`It was ${secret} and you found it in ${roundNum} attempts!`);
             return;
         }
         else {
