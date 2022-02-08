@@ -1,11 +1,14 @@
 const readline = require('readline');
 
 
+// publicly available:
+//const words = require('./pt-5-natura.json');       // likely PT words
+const words = require('./en-5-google-10k.json'); // likely EN words
+//const words = require('./en-5-scowl.json');      // likely and unlikely EN words
 
-//const words = require('./pt-5-natura.json');
-const words = require('./en-5-google-10k.json');
-//const words = require('./en-5-scowl.json');
-
+// these are from existing games thereofre I'm not making them available myself O:)
+//const words = require('./words-pt-palavra-do-dia').all;
+//const words = require('./words-en-wordle').all;
 
 
 ////////////////
@@ -97,6 +100,12 @@ function addCriteriaFromEvaluation(guess, feedback, criteria) {
         else if (feedbackLetter === EXISTS) {
             criteria[i] = `(w[${i}] !== '${guessLetter}' && w.indexOf('${guessLetter}') !== -1)`;
         }
+        else {
+            const subExpr = ` && (w.indexOf('${guessLetter}') === -1)`;
+            if (criteria[guess.length].indexOf(subExpr) === -1) {
+                criteria[guess.length] += subExpr;
+            }
+        }
     }
     return criteria;
 }
@@ -105,13 +114,16 @@ function criteriaToFilterFunction(criteria) {
     console.log('criteria', criteria);
     const l = criteria.length;
     const expr = (criteria.map((c, i) => `${c}${i !== l-1 ? ' && ' : ''}`)).join('');
-    //console.log('expr', expr);
-    return new Function(`const w = arguments[0]; return ${expr}`);
+    return new Function(`const w = arguments[0]; return (${expr})`);
+}
+
+function getArrayOfConstants(arraySize, constant) {
+    return Array.from( new Array(arraySize+1).join(1) ).map(()=>constant);
 }
 
 
 
-async function runGame() {
+async function runGame(cheat) {
     const rl = readline.createInterface(process.stdin, process.stdout);
 
     function getWord(question) {
@@ -122,15 +134,17 @@ async function runGame() {
         });
     }
 
-    const secret = pickOneOf(words);
+    const secret = cheat ? getArrayOfConstants(5, 'a').join('') : pickOneOf(words);
     const secret26 = to26(secret);
     let roundNum = 1;
     
-    let criteria = Array.from( new Array(secret26.length+1).join(1) ).map(()=>'true');
+    // we're holding space of a dedicated expression per local character + 1 where we update characters we know appear nowhere
+    // the expressions may result in a bit of redundancy but are easy to follow and evaluate
+    let criteria = getArrayOfConstants(secret26.length + 1, 'true');
     let universe = [...words26];
 
     while (true) {
-        const guess = await getWord(`Your guess at #${roundNum}? `);
+        const guess = to26( await getWord(`Your guess at #${roundNum}? `) );
         //console.log(guess, secret26, secret);
 
         if (guess.length !== secret26.length) {
@@ -144,8 +158,8 @@ async function runGame() {
             return;
         }
         else {
-            const feedback = evaluateGuess(guess, secret26).join('');
-            console.log(`feedback: ${feedback}`);
+            const feedback = cheat ? (await getWord(`Feedback you got ( ${secret.length} x [ ${RIGHT}, ${EXISTS} or ${NONE_OF_THESE} ] )? `)).split('') : evaluateGuess(guess, secret26);
+            console.log(`feedback: ${feedback.join('')}`);
             criteria = addCriteriaFromEvaluation(guess, feedback, criteria);
             const fn = criteriaToFilterFunction(criteria);
             universe = words26.filter(fn);
@@ -157,4 +171,6 @@ async function runGame() {
     }
 }
 
-runGame();
+// If cheat is set to true, you're not playing against a word the computer picked
+// You're instead making the computer help you filter the wordlist universe with the feedback you get from an external game
+runGame(false);

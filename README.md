@@ -1,9 +1,14 @@
 # wordle
 
+## TL;DR
+
 Playing with the algorithms after seeing https://www.youtube.com/watch?v=v68zYyaEmEA
 
-The filtering approach it gets you back is super naive.
+This node script allows you to play in the console or helps you play (depending on the cheat argument).
 
+I took a completely different approach - just setting local and global restrictions.
+Probabilities so far are the same for all words.
+Out of the candidates it computes, it shows you at most 10 random candidates.
 
 
 ## Game dictionaries:
@@ -14,7 +19,9 @@ The filtering approach it gets you back is super naive.
 - https://term.ooo/                       (in pt_BR)
 
 
-## Gathering my pt_PT dictionary the lazy way:
+## Gathering wordlists the lazy way
+
+## for pt_PT:
 
 - https://natura.di.uminho.pt/wiki/doku.php?id=dicionarios:main
 - https://natura.di.uminho.pt/download/sources/Dictionaries/wordlists/LATEST/
@@ -22,7 +29,7 @@ The filtering approach it gets you back is super naive.
 Created `pt-<n>-natura.json` by filtering out 5, 6 a 7 letter words out of the wordlists file, ignoring words with hiphen. All credits to Universidade do Minho!
 
 
-## Gathering my en_US dictionary the lazy way:
+## for en_US:
 
 - http://wordlist.aspell.net/ -> http://app.aspell.net/create
 
