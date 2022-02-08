@@ -6,9 +6,15 @@ Playing with the algorithms after seeing https://www.youtube.com/watch?v=v68zYya
 
 This node script allows you to play in the console or helps you play (depending on the cheat argument).
 
-I took a completely different approach - just setting local and global restrictions.
+
+Here's some demo playing sessions for you to check:
+- [playing game in english (w/ google 10k)](https://asciinema.org/a/467566)
+- [playing game in portuguese (w/ natura)](https://asciinema.org/a/467567)
+- TODO: playing in cheat mode
+
+I took a completely different approach to help solve the puzzle - just setting local and global restrictions.
 Probabilities so far are the same for all words.
-Out of the candidates it computes, it shows you at most 10 random candidates.
+After each input, out of the candidates it computes, it shows you at most 10 random candidates.
 
 
 ## Game dictionaries:
